@@ -209,20 +209,30 @@ void read_txt_and_face_match(MHandle handle) {
 	string data_s;
 	ifstream data_inf;
 	string sample;
-	data_inf.open("E://ArcFace_pro//data9.txt");
+	data_inf.open("E://ArcFace_pro//data6.txt");
 	char my_dir_eight[] = "0.8_abo//";	//通过strcat将文件夹信息组合成可寻址文件夹
 	char my_dir_seven[] = "0.7_0.8_amo//";
 	char my_dir_six[] = "0.6_0.7_amo//";
 	char my_dir_five[] = "0.55_0.6_amo//";
 	char last_dir[100] = "E://ArcFace_pro//last//";
-	char* file_path_name = { 0 };
+	char* file_path_name = { 0 };中的文件信息
 	const char* image_path2;
-	while (getline(data_inf, data_s))//getline(inf,s)是逐行读取inf中的文件信息
+	while (getline(data_inf, data_s))      //getline(inf,s)是逐行读取inf
 	{
 		couting++;
 		cout << "couting:-------------------------------------------------" << couting << endl;
 		image_path2 = data_s.data();
-		Resize(image_path2);
+		try
+		{
+			// 保护代码
+			Resize(image_path2);
+ 61		}
+		catch (exception)
+		{
+			// catch 块
+			cout << "出现异常！" << endl;
+			continue;
+		}
 		int lens_path2 = strlen(image_path2);
 		int counts = 0;
 		int flag = 1;
